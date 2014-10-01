@@ -7,7 +7,23 @@ def select_all_products():
         products=cursor.fetchall()
         return products
 
+def select_product(id):
+    with sqlite3.connect("coffee_shop.db") as db:
+        cursor=db.cursor()
+        cursor.execute("select * from Product where ProductID=?",(id,))
+        product=cursor.fetchone()
+        return product
+
+def select_product_name_price(id):
+    with sqlite3.connect("coffee_shop.db") as db:
+        cursor=db.cursor()
+        cursor.execute("select Name,Price from Product where ProductID=?",(id,))
+        product=cursor.fetchone()
+        return product
+
+
 if __name__=="__main__":
     products=select_all_products()
     print(products)
-#halfway through task 8
+    product=select_product(1)
+    print(product)
